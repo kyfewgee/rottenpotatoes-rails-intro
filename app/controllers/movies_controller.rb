@@ -46,6 +46,7 @@ class MoviesController < ApplicationController
     case sort
     when 'title'
       ordering,@title_header = {:title => :asc}, 'hilite'
+    end
   end
 
 end
