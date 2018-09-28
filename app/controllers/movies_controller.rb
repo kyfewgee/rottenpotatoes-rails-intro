@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-
+  
   def new
     # default: render 'new' template
   end
@@ -38,13 +38,6 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
-  def index
-    @movies = Movie.all(:order => "title ASC, release_date ASC")
-    if params[:sort_by] == 'title'
-      @title_header = 'hilite'
-    elsif params[:sort_by] == 'release_date'
-      @release_header ='hilite'
-    end 
-  end
+  
 
 end
