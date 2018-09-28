@@ -41,7 +41,7 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
-  def sort_by
+  def index
     sort = params[:sort] || session[:sort]
     case sort
     when 'title'
