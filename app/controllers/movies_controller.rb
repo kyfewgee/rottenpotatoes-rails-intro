@@ -16,10 +16,12 @@ class MoviesController < ApplicationController
     @movies = Movie.order(params[:sort_by])
     @sort_column = params[:sort_by]
     if params[:sort_by] == 'title'
-      @title_header = 'hilite'
+      ordering,@title_header = {:title => :asc}, 'hilite'
+      
     elsif params[:sort_by] == 'release_date'
-      @release_header ='hilite'
+      ordering,@date_header = {:release_date => :asc}, 'hilite'
     end
+    
     @all_ratings = Movie.all_ratings
     @selected_ratings = params[:ratings] || session[:ratings] || {}
 
