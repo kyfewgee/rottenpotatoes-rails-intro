@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    sort = session[:sort] || params[:sort]
+    sort = params[:sort] || session[:sort]
     
     if sort == 'title'
       sorting,@title = {:title => :asc}, 'hilite'
@@ -27,8 +27,8 @@ class MoviesController < ApplicationController
     end
 
     if params[:ratings] != session[:ratings] or params[:sort] != session[:sort]
-      session[:ratings] = @selected_ratingssession[:sort] = sort
       session[:sort] = sort
+      session[:ratings] = @selected_ratings
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
     @movies = Movie.where(rating: @selected_ratings.keys).order(sorting)
