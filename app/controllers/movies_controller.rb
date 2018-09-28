@@ -42,11 +42,12 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
   def index
-    sort = params[:sort] || session[:sort]
-    case sort
-    when 'title'
-      ordering,@title_header = {:title => :asc}, 'hilite'
-    end
+    @movies = Movie.all(:order => "title ASC, release_date ASC")
+   if params[:sort_by] == 'title'
+      @title_header = 'hilite'
+    elsif params[:sort_by] == 'release_date'
+      @release_header ='hilite'
+   end 
   end
 
 end
