@@ -12,22 +12,24 @@ class MoviesController < ApplicationController
 
   def index
     sort = params[:sort] || session[:sort]
-    
-
     if sort == 'title'
-      sorting,@title = {:title => :asc}, 'hilite'
+      sorting
+      @title = {:title => :asc}
+      'hilite'
     elsif sort == 'release_date'
-      sorting,@date = {:release_date => :asc}, 'hilite'
+      sorting
+      @date = {:release_date => :asc}
+      'hilite'
     end
     
     @all_ratings = Movie.all_ratings
     @selected_ratings = params[:ratings] || session[:ratings] || {}
 
     if @selected_ratings == {}
-      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
+      @selected_ratings = Hash[@all_ratings.map {|rating| [rating,rating]}]
     end
 
-    if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+    if params[:sort] != session[:sort] or params[:ratings] !=   session[:ratings]
       session[:sort] = sort
       session[:ratings] = @selected_ratings
       redirect_to :sort => sort, :ratings => @selected_ratings and return
