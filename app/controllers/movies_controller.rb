@@ -18,6 +18,7 @@ class MoviesController < ApplicationController
     elsif params[:sort_by] == 'release_date'
       @release_header ='hilite'
     end
+    @movies = Movie.all
   end
   
   def new
